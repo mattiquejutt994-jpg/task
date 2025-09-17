@@ -1,0 +1,155 @@
+:root{
+  --bg: #0f172a;
+  --panel: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --primary: #7c3aed;
+  --primary-2: #06b6d4;
+  --accent: #22c55e;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 14px;
+  --radius-sm: 10px;
+  --blur: saturate(180%) blur(10px);
+  --transition-fast: 160ms cubic-bezier(.2,.8,.2,1);
+  --transition-slow: 260ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* Light theme variables */
+:root.light{
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --primary: #7c3aed;
+  --primary-2: #0ea5e9;
+  --accent: #16a34a;
+  --danger: #dc2626;
+  --warning: #d97706;
+  --shadow: 0 10px 30px rgba(2,6,23,.1);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background: radial-gradient(1200px 800px at 10% -10%, rgba(124,58,237,.25), transparent 60%),
+              radial-gradient(1000px 600px at 110% 10%, rgba(14,165,233,.20), transparent 55%),
+              var(--bg);
+  color:var(--text);
+  line-height:1.6;
+}
+
+.container{max-width:1000px;margin:0 auto;padding:20px}
+.app-header{
+  position:sticky;top:0;z-index:10;
+  backdrop-filter: var(--blur);
+  background: color-mix(in srgb, var(--panel) 86%, transparent);
+  border-bottom:1px solid color-mix(in srgb, var(--panel) 90%, transparent);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.app-title{
+  margin:8px 0;
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 800;
+  letter-spacing: .3px;
+  background: linear-gradient(120deg, var(--primary), var(--primary-2));
+  -webkit-background-clip: text; background-clip:text; color: transparent;
+}
+
+.header-actions{display:flex;gap:12px;align-items:center}
+.btn{border:0;border-radius:999px;padding:10px 16px;font-weight:600;cursor:pointer;transition:transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);}
+.btn-primary{background: linear-gradient(135deg, var(--primary), var(--primary-2)); color:white; box-shadow: 0 10px 20px rgba(124,58,237,.35)}
+.btn-primary:hover{transform: translateY(-1px); box-shadow: 0 12px 24px rgba(124,58,237,.45)}
+.btn-outline{background: transparent; color: var(--text); border:1px solid color-mix(in srgb, var(--text) 18%, transparent)}
+.btn-outline:hover{background: color-mix(in srgb, var(--text) 6%, transparent)}
+
+.theme-toggle{display:flex;align-items:center;gap:8px;user-select:none}
+.toggle-track{width:50px;height:28px;background:color-mix(in srgb, var(--text) 12%, transparent);border-radius:999px;position:relative;box-shadow: inset 0 2px 6px rgba(0,0,0,.25);transition:background var(--transition-fast)}
+.toggle-thumb{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#fff,#ddd);transition:left var(--transition-fast), transform var(--transition-fast)}
+input#theme-toggle:checked + .toggle-track .toggle-thumb{left:25px; transform: rotate(180deg)}
+.toggle-label{font-size:14px;color:var(--muted)}
+
+.app-main .controls{
+  margin-top:22px;
+  background: color-mix(in srgb, var(--panel) 88%, transparent);
+  border:1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding:16px;
+}
+
+.add-task-form .field-group{display:grid;grid-template-columns: 1fr max-content max-content; gap:10px}
+.add-task-form input[type="text"],
+.add-task-form input[type="date"],
+#search-input,
+select{
+  width:100%;
+  padding:12px 14px;
+  border-radius: var(--radius-sm);
+  border:1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  background: color-mix(in srgb, var(--panel) 95%, transparent);
+  color: var(--text);
+  outline: none;
+  transition: border var(--transition-fast), transform var(--transition-fast), background var(--transition-fast);
+}
+input:focus, select:focus{border-color: color-mix(in srgb, var(--primary) 60%, var(--text))}
+
+.filters-row{display:grid;grid-template-columns: 1fr max-content max-content; gap:10px; margin-top:14px}
+.search-group{min-width:0}
+
+.task-list-section{margin-top:18px}
+.task-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+
+.task-item{
+  display:flex;align-items:center;gap:12px;
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  border:1px solid color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: var(--radius);
+  padding:12px;
+  box-shadow: var(--shadow);
+  animation: fadeIn .35s var(--transition-slow);
+}
+
+@keyframes fadeIn{from{opacity:0; transform: translateY(6px)} to{opacity:1; transform: translateY(0)}}
+@keyframes fadeOut{from{opacity:1; height:60px; margin:6px 0} to{opacity:0; height:0; margin:0}}
+
+.checkbox{
+  width:22px;height:22px;display:grid;place-items:center;border-radius:6px;
+  border:2px solid color-mix(in srgb, var(--text) 20%, transparent);
+  cursor:pointer; transition: all var(--transition-fast);
+}
+.checkbox.checked{background: linear-gradient(135deg, var(--accent), #34d399); border-color:transparent; box-shadow: 0 8px 20px rgba(34,197,94,.35)}
+.checkbox svg{width:14px;height:14px;opacity:0;transform: scale(.6);transition: all var(--transition-fast)}
+.checkbox.checked svg{opacity:1;transform: scale(1)}
+
+.task-content{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.task-title{font-weight:600; word-break: break-word}
+.task-title.completed{text-decoration: line-through; color: var(--muted)}
+.task-meta{font-size:12px;color:var(--muted)}
+
+.task-actions{display:flex;gap:6px}
+.icon-btn{width:38px;height:38px;border-radius:10px;border:1px solid color-mix(in srgb, var(--text) 10%, transparent);background: color-mix(in srgb, var(--panel) 95%, transparent); display:grid;place-items:center;cursor:pointer;transition: transform var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast)}
+.icon-btn:hover{transform: translateY(-1px); background: color-mix(in srgb, var(--panel) 92%, transparent)}
+.icon-btn.delete{color:#fff; background: linear-gradient(135deg,var(--danger),#f87171); border:0; box-shadow: 0 10px 18px rgba(239,68,68,.35)}
+.icon-btn.delete:hover{box-shadow: 0 12px 22px rgba(239,68,68,.5)}
+
+.empty-state{margin:18px 8px;color:var(--muted); text-align:center}
+
+.visually-hidden{position:absolute !important; height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px); white-space:nowrap}
+
+/* Inline edit */
+.edit-input{width:100%; padding:10px 12px; border-radius:10px; border:1px solid color-mix(in srgb, var(--text) 16%, transparent); background: color-mix(in srgb, var(--panel) 96%, transparent); color: var(--text)}
+
+/* Responsive */
+@media (max-width: 700px){
+  .add-task-form .field-group{grid-template-columns: 1fr 1fr;}
+  #due-date-input{order:2}
+  #add-task-btn{grid-column: span 2}
+  .filters-row{grid-template-columns: 1fr;}
+}
+
+
+

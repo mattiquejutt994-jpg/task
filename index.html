@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Task Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="app-header" role="banner">
+      <div class="container header-inner">
+        <h1 class="app-title" aria-label="Task Manager">Task Manager</h1>
+        <div class="header-actions">
+          <button class="btn btn-outline" id="clear-completed-btn" title="Clear completed tasks" aria-label="Clear completed tasks">
+            Clear Completed
+          </button>
+          <label class="theme-toggle" title="Toggle dark mode">
+            <input type="checkbox" id="theme-toggle" aria-label="Toggle dark mode" />
+            <span class="toggle-track">
+              <span class="toggle-thumb"></span>
+            </span>
+            <span class="toggle-label">Dark</span>
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main" role="main">
+      <div class="container">
+        <section class="controls" aria-labelledby="add-task-heading">
+          <h2 id="add-task-heading" class="visually-hidden">Add and Manage Tasks</h2>
+          <form id="add-task-form" autocomplete="off" class="add-task-form" aria-label="Add new task form">
+            <div class="field-group">
+              <input type="text" id="task-input" name="task" placeholder="Add a new task..." aria-label="Task title" required />
+              <input type="date" id="due-date-input" name="dueDate" aria-label="Due date" />
+              <button type="submit" class="btn btn-primary" id="add-task-btn" aria-label="Add task">Add</button>
+            </div>
+          </form>
+
+          <div class="filters-row">
+            <div class="search-group">
+              <input type="search" id="search-input" placeholder="Search tasks..." aria-label="Search tasks" />
+            </div>
+
+            <div class="filter-group" role="group" aria-label="Filter tasks">
+              <select id="status-filter" aria-label="Filter by status">
+                <option value="all">All</option>
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+
+            <div class="sort-group" role="group" aria-label="Sort tasks">
+              <select id="sort-select" aria-label="Sort tasks">
+                <option value="created_desc">Newest created</option>
+                <option value="created_asc">Oldest created</option>
+                <option value="due_asc">Due date ↑</option>
+                <option value="due_desc">Due date ↓</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="task-list-section" aria-labelledby="task-list-heading">
+          <h2 id="task-list-heading" class="visually-hidden">Task List</h2>
+          <ul id="task-list" class="task-list" role="list"></ul>
+          <p id="empty-state" class="empty-state" role="status" aria-live="polite">No tasks yet. Add your first task above!</p>
+        </section>
+      </div>
+    </main>
+
+    <footer class="app-footer" role="contentinfo">
+     
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+
+
+
