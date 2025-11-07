@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mattiquejutt994-jpg.github.io/task/sitemap.xml
